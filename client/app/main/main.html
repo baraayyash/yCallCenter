@@ -1,28 +1,179 @@
-<div ng-include="'components/navbar/navbar.html'"></div>
+<style>
+.profile-usertitle-job {
+    text-transform: uppercase;
+    color: #5b9bd1;
+    font-size: 12px;
+    font-weight: 800;
+    margin-bottom: 7px;
+}
 
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  </div>
-</header>
+,
+.profile-userbuttons {
+    text-align: center;
+    margin-top: 10px;
+}
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
-      </ul>
+.profile-usertitle-name {
+    color: #5a7391;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+</style>
+<div class="page-fixed-main-content">
+    <div class="row">
+        <div class="col-md-8 ">
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption caption-md font-blue">
+                        <i class="glyphicon glyphicon-earphone"></i>
+                        <span class="caption-subject theme-font bold ">My Calls</span>
+                    </div>
+                    <div class="actions">
+                        <div style="margin-top:15px;text-align: center" class="btn-group" dropdown="" keyboard-nav="" style="">
+                            <button id="simple-btn-keyboard-nav" type="button" class="btn btn-default" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+                                Available <span style="background-color: #249710" class="badge badge-empty badge-success"></span>
+                                <span class="caret"></span>
+                            </button>
+                            <ul style="min-width: 100px;width100px;" class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
+                                <li role="menuitem"><a href="">  Available </a></li>
+                                <li role="menuitem"><a href="">Busy </a></li>
+                                <li role="menuitem"><a href="">Away</a></li>
+                                <li role="menuitem"><a href="">Offline</a></li>
+                                <li class="divider"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="portlet-body">
+                    <div style="overflow-x:hidden;height: 308px;overflow-y: scroll;" class="scroller"  data-always-visible="1" data-rail-visible="0">
+                        <ul class="feeds">
+                            <li ng-repeat="call in calls |  orderBy: 'Time':true ">
+                                <a href="">
+                                    <div style="width:85%" class="col1">
+                                        <div class="cont">
+                                            <div class="cont-col1">
+                                                <div class="label label-sm label-default">
+                                                            <i class="fa fa-user"></i>
+                                                        </div>
+                                            </div>
+                                            <div class="cont-col2">
+                                                <div class="desc">
+                                                    <span class="label label-sm label-success">
+                                                             {{call.From}} </span>
+
+                                                             <span style="margin-left: 4px;" > called you. Call Duration {{call.Duration}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div style="width: 176px" class="col2">
+                                        <div class="date">
+                                    {{call.Time | timeago}}
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="scroller-footer">
+                        <div class="btn-arrow-link pull-right">
+                            <a href="#">See All Records</a>
+                            <i class="icon-arrow-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- BEGIN PORTLET-->
+            <div class="portlet light bordered">
+                <div class="portlet-title">
+                    <div class="caption">
+                        <span class="caption-subject bold  font-red-sunglo">Handling Calls</span>
+                        <span class="caption-helper">incoming calls...
+                         </span>
+                    </div>
+                </div>
+                <div style="height:344px" class="portlet-body">
+                    <div style="margin-top:30px;" ng-if="status == 'waiting' ">
+                        <div style="text-align: center">
+                            <div style="margin-top:15px;text-align: center" class="btn-group" dropdown="" keyboard-nav="" style="">
+                                <button id="simple-btn-keyboard-nav" type="button" class="btn btn-default" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
+                                    caller id : +152362361252 <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
+                                    <li role="menuitem"><a href="">+152362361252</a></li>
+                                    <li role="menuitem"><a href="">+972599437784</a></li>
+                                    <li role="menuitem"><a href="">+201365236423</a></li>
+                                    <li class="divider"></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div style="margin-top:20px;text-align: center" class="input-group input-group-lg">
+                            <span class="input-group-addon" id="sizing-addon1">00</span>
+                            <input type="text" class="form-control" placeholder="Phone Number" aria-describedby="sizing-addon1">
+                        </div>
+                        <div style="margin-top:20px;text-align: center" class="profile-userbuttons">
+                            <button style="width:20%;marin-top:20px;" type="button" class="btn btn-primary" aria-haspopup="true" aria-expanded="false">call</button>
+                        </div>
+                    </div>
+                    <div ng-if=" status == 'call' " class="profile-sidebar" style="width: 250px;margin: 0 auto;">
+                        <!-- PORTLET MAIN -->
+                        <div class="portlet light profile-sidebar-portlet">
+                            <!-- SIDEBAR USERPIC -->
+                            <center>
+                                <div style="align:center" class="profile-userpic">
+                                    <span ng-if="loading == 1">
+                                     <img  style="float:right;height: 40px; width:40p" src="http://www.pecsusa.com/loading.gif">
+                                </span>
+                                    <img style="border-radius: 50% !important;" src="{{user.urlImage}}" class="img-responsive" alt="">
+                                </div>
+                                <!-- END SIDEBAR USERPIC -->
+                                <!-- SIDEBAR USER TITLE -->
+                                <div class="profile-usertitle">
+                                    <div style="margin-bottom: 7px;" class="profile-usertitle-name">
+                                        {{user.Name}}
+                                    </div>
+                                    <div class="profile-usertitle-job">
+                                        {{user.Phone}}
+                                    </div>
+                                </div>
+                                <!-- END SIDEBAR USER TITLE -->
+                                <!-- SIDEBAR BUTTONS -->
+                                <div class="profile-userbuttons">
+                                    <div ng-if="callStatus == 'incoming' ">
+                                        <button ng-click="accept()" type="button" class="btn btn-circle blue  btn-sm">Answer</button>
+                                        <button ng-click="ignore()" ng-if="1" type="button" class="btn btn-circle btn-danger btn-sm">Reject</button>
+                                    </div>
+                                    <div ng-if="callStatus == 'going' ">
+                                        <timer ng-model="time1" interval="1000" max-time-unit="'minute'">
+                                            <div>
+                                                <h1 style="font-weight: bold; margin-top: 3px;"> {{mminutes}} : {{sseconds}} </h1> </div>
+                                        </timer>
+                                        <button ng-if="muted == 'false' " ng-click="mute()" type="button" class="btn btn-default" title="Mute"><span class="glyphicon glyphicon-volume-off" aria-hidden="true"></span> </button>
+                                        <button ng-if="muted == 'true' " ng-click="mute()" type="button" class="btn btn-default" title="un Mute"><span class="glyphicon glyphicon-volume-up" aria-hidden="true"></span> </button>
+                                        <button type="button" class="btn btn-default" title="Hold"><span class="glyphicon glyphicon-pause" glyphicon glyphicon-volume-offaria-hidden="true"></span> </button>
+                                        <button ng-click="block(user.udid,1);hangUp();" ng-if="user.Blocked == 'unblocked' " type="button" class="btn btn-danger" aria-haspopup="true" aria-expanded="false">Block </button>
+                                        <button ng-click="block(user.udid,0)" ng-if="user.Blocked == 'blocked' " type="button" class="btn btn-circle green btn-sm">Unblock</button>
+                                        <div style="margin-top: 3px" class="profile-userbuttons">
+                                            <button style="width: 70%" ng-click="hangUp(time1)" ng-if="1" type="button" class="btn btn-circle btn-danger btn-sm">Hang up</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </center>
+                            <!-- END SIDEBAR BUTTONS -->
+                            <!-- SIDEBAR MENU -->
+                            <!-- END MENU -->
+                        </div>
+                        <!-- END PORTLET MAIN -->
+                        <!-- PORTLET MAIN -->
+                        <!-- END PORTLET MAIN -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PORTLET-->
     </div>
-  </div>
 </div>
-
-<footer class="footer">
-  <div class="container">
-      <p>Angular Fullstack v2.0.13 |
-        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
-  </div>
-</footer>
+</div>

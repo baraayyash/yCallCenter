@@ -5,14 +5,15 @@ angular.module('yCallCenterApp', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngtimeago',
+  'timer'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
       .otherwise({
         redirectTo: '/'
       });
-
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push('authInterceptor');
   })
@@ -46,10 +47,15 @@ angular.module('yCallCenterApp', [
   .run(function ($rootScope, $location, Auth) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$routeChangeStart', function (event, next) {
-      Auth.isLoggedInAsync(function(loggedIn) {
-        if (next.authenticate && !loggedIn) {
-          $location.path('/login');
-        }
-      });
+
+
+    //   Auth.isLoggedInAsync(function(loggedIn) {
+    //     if (next.authenticate && !loggedIn) {
+    //       $location.path('/login');
+    //     }
+    //   });
+    // });
+      if ( !$rootScope.loggedIn ) {
+          $location.path( "/login" );        }
     });
   });
