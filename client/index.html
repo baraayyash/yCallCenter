@@ -124,26 +124,26 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                         <!-- END GROUP NOTIFICATION -->
                         <!-- BEGIN USER PROFILE -->
-                        <div class="btn-group-img btn-group">
+                        <div class="btn-group-img btn-group" ng-controller="LoginCtrl">
                             <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                 <img src="assets/admin/layout6/img/avatar1.jpg" alt="">
                             </button>
                             <ul class="dropdown-menu-v2" role="menu">
                                 <li class="active">
-                                    <a href="profile.html">My Profile <span class="badge badge-danger">1</span> </a>
+                                    <a href="">My Profile <span class="badge badge-danger">1</span> </a>
                                 </li>
                                 <li>
-                                    <a href="#">My Inbox <span class="badge badge-info">3</span> </a>
+                                    <a href="">My Inbox <span class="badge badge-info">3</span> </a>
                                 </li>
                                 <li>
-                                    <a href="todo.html">My Tasks</a>
+                                    <a href="">My Tasks</a>
                                 </li>
-                                <li class="divider"></li>
+                                <li class=""></li>
                                 <li>
-                                    <a href="lock_screen.html">Lock Screen</a>
+                                    <a href="">Lock Screen</a>
                                 </li>
                                 <li>
-                                    <a href="login.html">Sign Out</a>
+                                    <a ng-click="logout()">Sign Out</a>
                                 </li>
                             </ul>
                         </div>

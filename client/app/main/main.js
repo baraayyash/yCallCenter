@@ -11,17 +11,16 @@ angular.module('yCallCenterApp')
 
         resolve : {
 
-            "check" : function($location,$rootScope){
+            "check" : function($location,$rootScope,$cookieStore){
 
-                if(!$rootScope.loggedIn ){
+                if(!$cookieStore.get('userEmail')){
                         $location.path("/login");
+                        console.log("error");
                     }
             }
-
         },
         templateUrl: 'app/main/main.html',
-        controller: 'MainCtrl'
-
+        controller: 'MainCtrl',
 
         });
   });

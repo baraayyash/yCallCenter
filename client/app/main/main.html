@@ -60,16 +60,16 @@
                                             <div class="cont-col2">
                                                 <div class="desc">
                                                     <span class="label label-sm label-success">
-                                                             {{call.From}} </span>
+                                                             {{call.user}} </span>
 
-                                                             <span style="margin-left: 4px;" > called you. Call Duration {{call.Duration}}</span>
+                                                             <span style="margin-left: 4px;" > called you. Call Duration {{call.duration}}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div style="width: 176px" class="col2">
                                         <div class="date">
-                                    {{call.Time | timeago}}
+                                    {{call.time | timeago}}
                                         </div>
                                     </div>
                                 </a>
@@ -127,16 +127,15 @@
                                     <span ng-if="loading == 1">
                                      <img  style="float:right;height: 40px; width:40p" src="http://www.pecsusa.com/loading.gif">
                                 </span>
-                                    <img style="border-radius: 50% !important;" src="{{user.urlImage}}" class="img-responsive" alt="">
+                                    <img style="border-radius: 50% !important;" src="/assets/admin/layout/img/male3-512.png" class="img-responsive" alt="">
                                 </div>
                                 <!-- END SIDEBAR USERPIC -->
                                 <!-- SIDEBAR USER TITLE -->
                                 <div class="profile-usertitle">
                                     <div style="margin-bottom: 7px;" class="profile-usertitle-name">
-                                        {{user.Name}}
+                                        {{userUDID}}
                                     </div>
                                     <div class="profile-usertitle-job">
-                                        {{user.Phone}}
                                     </div>
                                 </div>
                                 <!-- END SIDEBAR USER TITLE -->
