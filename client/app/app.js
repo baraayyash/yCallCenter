@@ -15,6 +15,7 @@ angular.module('yCallCenterApp', [
         redirectTo: '/'
       });
     $locationProvider.html5Mode(true);
+    $httpProvider.withCredentials = true;
     $httpProvider.interceptors.push('authInterceptor');
   })
 
@@ -44,7 +45,7 @@ angular.module('yCallCenterApp', [
     };
   })
 
-  .run(function ($rootScope, $location, Auth) {
+  .run(function ($rootScope, $location,$cookieStore, Auth) {
     // Redirect to login if route requires auth and you're not logged in
     $rootScope.$on('$routeChangeStart', function (event, next) {
 
@@ -55,7 +56,9 @@ angular.module('yCallCenterApp', [
     //     }
     //   });
     // });
-      if ( !$rootScope.loggedIn ) {
-          $location.path( "/login" );        }
+                if(!$cookieStore.get('userEmail')){
+                        $location.path("/login");
+                        console.log("error from app.js");
+                    }
     });
   });
