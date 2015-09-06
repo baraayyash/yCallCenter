@@ -44,21 +44,28 @@ angular.module('yCallCenterApp', [
       }
     };
   })
-
-  .run(function ($rootScope, $location,$cookieStore, Auth) {
+.run(function($rootScope, $location, $cookieStore, Auth) {
     // Redirect to login if route requires auth and you're not logged in
-    $rootScope.$on('$routeChangeStart', function (event, next) {
+    $rootScope.$on('$routeChangeStart', function(event, next) {
 
+        if ($cookieStore.get('currentSupervisor') ) {
+              $rootScope.supervisor = $cookieStore.get('currentSupervisor');
+              $location.path(next.$$route.originalPath);
+        }
 
-    //   Auth.isLoggedInAsync(function(loggedIn) {
-    //     if (next.authenticate && !loggedIn) {
-    //       $location.path('/login');
-    //     }
-    //   });
-    // });
-                if(!$cookieStore.get('userEmail')){
-                        $location.path("/login");
-                        console.log("error from app.js");
-                    }
+          Auth.isLoggedInAsync(function(loggedIn){
+            if (next.authenticate || !loggedIn) {
+              $cookieStore.remove('currentSupervisor');
+              $location.path('/login');
+            }
+          });
+
+        if (!$cookieStore.get('currentSupervisor') ) {
+            $location.path("/login");
+        }
+
+        if ($cookieStore.get('currentSupervisor') && next.$$route.originalPath =="/login" ) {
+            $location.path("/");
+        }
     });
-  });
+});

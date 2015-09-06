@@ -58,7 +58,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 
-<body ng-app="yCallCenterApp" class="page-quick-sidebar-over-content" >
+<body ng-app="yCallCenterApp" class="page-quick-sidebar-over-content" ng-controller="LoginCtrl" >
     <title>yCallCenter</title>
     <!-- <title ng-if="unreadMyConvs ==0">Ychat   </title> -->
     <!-- BEGIN MAIN LAYOUT -->
@@ -69,7 +69,7 @@ License: You must have a valid license purchased only from themeforest(the above
                 <div class="havbar-header">
                     <!-- BEGIN LOGO -->
                     <div style="float: left;">
-                    <a id="index" class="navbar-brand" href="start.html">
+                    <a id="index" class="navbar-brand" href="/">
                         <img src="assets/admin/layout6/img/logo.png" alt="Logo">
                     </a>
                     </div>
@@ -93,7 +93,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
                         <!-- END HEADER SEARCH BOX -->
                         <!-- BEGIN GROUP NOTIFICATION -->
-                        <div class="btn-group-notification btn-group" id="header_notification_bar">
+                        <div ng-if="supervisor" class="btn-group-notification btn-group" id="header_notification_bar">
                             <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                 <span class="badge"> 0 </span>
                             </button>
@@ -124,7 +124,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         </div>
                         <!-- END GROUP NOTIFICATION -->
                         <!-- BEGIN USER PROFILE -->
-                        <div class="btn-group-img btn-group" ng-controller="LoginCtrl">
+                        <div class="btn-group-img btn-group"  ng-if="supervisor">
                             <button type="button" class="btn btn-sm dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                                 <img src="assets/admin/layout6/img/avatar1.jpg" alt="">
                             </button>
@@ -140,7 +140,7 @@ License: You must have a valid license purchased only from themeforest(the above
                                 </li>
                                 <li class=""></li>
                                 <li>
-                                    <a href="">Lock Screen</a>
+                                    <a ng-if="supervisor.role == 'admin' "  href="/admin">admin settings</a>
                                 </li>
                                 <li>
                                     <a ng-click="logout()">Sign Out</a>
@@ -202,14 +202,7 @@ License: You must have a valid license purchased only from themeforest(the above
         });
 
     });
-    ! function(A, n, g, u, l, a, r) {
-        A.GoogleAnalyticsObject = l, A[l] = A[l] || function() {
-                (A[l].q = A[l].q || []).push(arguments)
-            }, A[l].l = +new Date, a = n.createElement(g),
-            r = n.getElementsByTagName(g)[0], a.src = u, r.parentNode.insertBefore(a, r)
-    }(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-    ga('create', 'UA-XXXXX-X');
-    ga('send', 'pageview');
+
     </script>
 
     <!--[if lt IE 9]>

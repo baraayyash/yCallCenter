@@ -1,63 +1,55 @@
 'use strict';
 
 angular.module('yCallCenterApp')
-  .controller('MainCtrl', function ($scope,$cookieStore, $http, $q, $routeParams,$rootScope,$timeout) {
+  .controller('MainCtrl', function ($scope,$cookieStore, $http, $q, $routeParams,$rootScope) {
 
 $scope.status = 'waiting';
 $scope.callStatus = 'going';
-// $scope.supervisor = $routeParams.id;
-$scope.supervisor = 1;
+$scope.supervisorStatus = 'Available';
 var calltime = 0;
 var timerData = 0;
 var connection = 0;
-var connection;
-var flag = 0;
-
-console.log($cookieStore.get('userEmail'));
-// $timeout(function(){
-// $http.get('https://yamsafer-call.herokuapp.com/do').success(function(token) {
-//     Twilio.Device.setup(token);
-// });
-// },1000);
+var flag = 1;
 
 
-
+//token to setup the connection
 $http.get('/api/calls/token/1').success(function(token) {
     Twilio.Device.setup(token);
-    console.log(token);
 });
 
-
-$http.get('/api/calls/supervisor/' + $scope.supervisor + '').success(function(calls) {
+// calls for the supervisor
+$http.get('/api/calls/supervisor/' + $rootScope.supervisor._id+ '').success(function(calls) {
     $scope.calls = calls;
-    console.log(calls);
 });
 
 Twilio.Device.ready(function(device) {
     // $scope.status = "ready to kick!";
 });
 
+// reconnect with new token
 Twilio.Device.error(function(error) {
     $http.get('https://yamsafer-call.herokuapp.com/do').success(function(token) {
         Twilio.Device.setup(token);
-    }); // Note: Should do error checking here.
+    });
 });
 
+// if the mobile user canceled the call
 Twilio.Device.cancel(function(device) {
-
     $scope.status = 'waiting';
     if (flag)
         $scope.$apply();
     flag = 1;
 });
 
+//accept the call
 Twilio.Device.connect(function(conn) {
     // $scope.status = "got a call";
     connection = conn;
 });
 
+// close the connection
 Twilio.Device.disconnect(function(conn) {
-    // $scope.status = "call ended"
+
     function n(num) {
         return num > 9 ? "" + num : "0" + num;
     }
@@ -73,6 +65,9 @@ Twilio.Device.disconnect(function(conn) {
 
 /* Listen for incoming connections */
 Twilio.Device.incoming(function(conn) {
+
+    if($scope.supervisorStatus != 'Available')
+       return conn.ignore();
 
     if (!document.hasFocus()) {
         var notification = new Notification('New Call', {
@@ -96,13 +91,7 @@ Twilio.Device.incoming(function(conn) {
 $scope.accept = function() {
     connection.accept();
     $scope.callStatus = 'going';
-    var time = new Date();
-
-    calltime = time.getFullYear() + '-' +
-        (((time.getMonth() + 1) < 10) ? ("0" + (time.getMonth() + 1)) : (time.getMonth() + 1)) + '-' + ((time.getDate() < 10) ? ("0" + time.getDate()) : time.getDate()) + " " +
-        time.getHours() + ':' +
-        ((time.getMinutes() < 10) ? ("0" + time.getMinutes()) : (time.getMinutes())) + ':' +
-        ((time.getSeconds() < 10) ? ("0" + time.getSeconds()) : (time.getSeconds()));
+    calltime =  Date.now();
 };
 
 $scope.$on('timer-stopped', function(event, data) {
@@ -132,15 +121,13 @@ var saveCall = function(connection, timerData) {
         data: {
             user: connection.parameters.From,
             duration: timerData,
-            supervisor: $scope.supervisor,
+            supervisor: $rootScope.supervisor._id,
             time: calltime
         }
     });
-
     request.success(function() {
-        $http.get('/api/calls/supervisor/' + $scope.supervisor + '').success(function(calls) {
+        $http.get('/api/calls/supervisor/' +$rootScope.supervisor._id+ '').success(function(calls) {
             $scope.calls = calls;
-            console.log(calls);
         });
     });
 };
@@ -157,7 +144,4 @@ $scope.mute = function() {
         connection.mute(true);
     }
 };
-
-
-
   });

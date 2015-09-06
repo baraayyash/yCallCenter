@@ -13,7 +13,7 @@ angular.module('yCallCenterApp')
 
             "check" : function($location,$rootScope,$cookieStore){
 
-                if(!$cookieStore.get('userEmail')){
+                if(!$cookieStore.get('currentSupervisor')){
                         $location.path("/login");
                         console.log("error");
                     }

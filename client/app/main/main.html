@@ -32,15 +32,14 @@
                     <div class="actions">
                         <div style="margin-top:15px;text-align: center" class="btn-group" dropdown="" keyboard-nav="" style="">
                             <button id="simple-btn-keyboard-nav" type="button" class="btn btn-default" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
-                                Available <span style="background-color: #249710" class="badge badge-empty badge-success"></span>
+                                {{supervisorStatus}} <span  ng-if="supervisorStatus == 'Available' "style="background-color: #249710" class="badge badge-empty badge-success"></span>
                                 <span class="caret"></span>
                             </button>
                             <ul style="min-width: 100px;width100px;" class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
-                                <li role="menuitem"><a href="">  Available </a></li>
-                                <li role="menuitem"><a href="">Busy </a></li>
-                                <li role="menuitem"><a href="">Away</a></li>
-                                <li role="menuitem"><a href="">Offline</a></li>
-                                <li class="divider"></li>
+                                <li  ng-click="supervisorStatus = 'Available';" role="menuitem"><a>  Available </a></li>
+                                <li  ng-click="supervisorStatus = 'Busy';"  role="menuitem"><a >Busy </a></li>
+                               <li  ng-click="supervisorStatus = 'Busy';"  role="menuitem"><a >away </a></li>
+                                <li   ng-click="supervisorStatus = 'Offline';" role="menuitem"><a>Offline</a></li>
                             </ul>
                         </div>
                     </div>
