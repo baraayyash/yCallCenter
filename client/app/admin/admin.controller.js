@@ -5,6 +5,8 @@ angular.module('yCallCenterApp')
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();
+     $scope.errors = {};
+
 
     $scope.delete = function(user) {
       User.remove({ id: user._id });
@@ -14,4 +16,30 @@ angular.module('yCallCenterApp')
         }
       });
     };
+
+            $scope.creatUser = function(form) {
+            $scope.submitted = true;
+            // if($scope.users)
+            if (form.$valid ) {
+                Auth.createUser({
+                        email: $scope.user.email,
+                        password: $scope.user.password,
+                        name: $scope.user.name
+                    })
+                    .then(function() {
+
+                      $scope.users = User.query();
+                      $scope.errors.other = 'done';
+
+                    })
+                    .catch(function(err) {
+                      if(err.status = 422)
+                        $scope.errors.other = "user exists";
+                    });
+            }
+
+        };
+
+
+
   });

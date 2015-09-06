@@ -66,7 +66,7 @@ angular.module('yCallCenterApp')
             return cb(user);
           },
           function(err) {
-            this.logout();
+            // this.logout();
             return cb(err);
           }.bind(this)).$promise;
       },

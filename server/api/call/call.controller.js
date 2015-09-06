@@ -34,7 +34,6 @@ exports.token = function(req, res) {
     var request = require('request');
 request('https://yamsafer-call.herokuapp.com/do', function (error, response, body) {
   if (!error && response.statusCode == 200) {
-    console.log(body) // Print the google web page.
     return res.json(body);
   }
 });
