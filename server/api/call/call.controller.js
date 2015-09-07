@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Call = require('./call.model');
+var request = require('request');
 
 // Get list of calls
 exports.index = function(req, res) {
@@ -30,18 +31,39 @@ exports.supervisor = function(req, res) {
 };
 
 
+// get the token from heroku
 exports.token = function(req, res) {
-    var request = require('request');
 request('https://yamsafer-call.herokuapp.com/do', function (error, response, body) {
   if (!error && response.statusCode == 200) {
     return res.json(body);
   }
 });
+
 };
 
+// to the heruko server
+exports.flag = function(req, res) {
+request.post(
+    'https://yamsafer-call.herokuapp.com/voice',
+    { form: { flag: req.body.id,
+                    key: '5c752bc120b33be132a4366f15559c7c'
+     } },
+    function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+        }
+    }
+);
 
+};
 
+exports.getFlag = function(req, res) {
+request('https://yamsafer-call.herokuapp.com/flag', function (error, response, body) {
+  if (!error && response.statusCode == 200) {
+    return res.json(body);
+  }
+});
 
+};
 
 
 // Creates a new call in the DB.

@@ -34,7 +34,6 @@ angular.module('yCallCenterApp')
             Auth.logout();
             $location.path("/login");
             $rootScope.supervisor = 0;
-
         };
 
     });
