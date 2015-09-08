@@ -28,9 +28,9 @@ Twilio.Device.ready(function(device) {
 
 // reconnect with new token
 Twilio.Device.error(function(error) {
-    $http.get('https://yamsafer-call.herokuapp.com/do').success(function(token) {
-        Twilio.Device.setup(token);
-    });
+$http.get('/api/calls/token/1').success(function(token) {
+    Twilio.Device.setup(token);
+});
 });
 
 // if the mobile user canceled the call
