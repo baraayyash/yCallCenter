@@ -14,6 +14,10 @@ npm install bower -g
 
 2- npm install request
 
+3 - npm install socket.io
+
+4 - npm install socket.io-client
+
 -- clinet side -- 
 
 1- bower install 
