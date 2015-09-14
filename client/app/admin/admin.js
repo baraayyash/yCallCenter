@@ -5,15 +5,28 @@ angular.module('yCallCenterApp')
     $routeProvider
       .when('/admin', {
         resolve : {
+            'check' : function($location,$rootScope){
 
-            "check" : function($location,$rootScope,$cookieStore){
-
-                if($rootScope.supervisor.role != 'admin'){
-                        $location.path("/");
+                if($rootScope.supervisor.role !== 'admin'){
+                        $location.path('/');
                     }
             }
         },
         templateUrl: 'app/admin/admin.html',
         controller: 'AdminCtrl'
+      })
+      .when('/admin/view', {
+        resolve : {
+            'check' : function($location,$rootScope){
+
+                if($rootScope.supervisor.role !== 'admin'){
+                        $location.path('/');
+                    }
+            }
+        },
+        templateUrl: 'app/admin/view/view.html',
+        controller: 'ViewCtrl'
       });
+
+
   });

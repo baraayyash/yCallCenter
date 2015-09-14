@@ -7,7 +7,8 @@ angular.module('yCallCenterApp', [
   'ngRoute',
   'ui.bootstrap',
   'ngtimeago',
-  'timer'
+  'timer',
+  'smart-table'
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
@@ -61,11 +62,11 @@ angular.module('yCallCenterApp', [
           });
 
         if (!$cookieStore.get('currentSupervisor') ) {
-            $location.path("/login");
+            $location.path('/login');
         }
 
-        if ($cookieStore.get('currentSupervisor') && next.$$route.originalPath =="/login" ) {
-            $location.path("/");
+        if ($cookieStore.get('currentSupervisor') && next.$$route.originalPath ==='/login' ) {
+            $location.path('/');
         }
     });
 });

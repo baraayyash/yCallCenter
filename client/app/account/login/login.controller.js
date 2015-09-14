@@ -32,7 +32,7 @@ angular.module('yCallCenterApp')
         $scope.logout = function() {
             $cookieStore.remove('currentSupervisor');
             Auth.logout();
-            $location.path("/login");
+            $location.path('/login');
             $rootScope.supervisor = 0;
         };
 

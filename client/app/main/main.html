@@ -98,23 +98,13 @@
                     <div style="margin-top:30px;" ng-if="status == 'waiting' ">
                         <div style="text-align: center">
                             <div style="margin-top:15px;text-align: center" class="btn-group" dropdown="" keyboard-nav="" style="">
-                                <button id="simple-btn-keyboard-nav" type="button" class="btn btn-default" dropdown-toggle="" aria-haspopup="true" aria-expanded="false">
-                                    caller id : +152362361252 <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="simple-btn-keyboard-nav">
-                                    <li role="menuitem"><a href="">+152362361252</a></li>
-                                    <li role="menuitem"><a href="">+972599437784</a></li>
-                                    <li role="menuitem"><a href="">+201365236423</a></li>
-                                    <li class="divider"></li>
-                                </ul>
+                                <h3 ng-if="queue > 0"> you have {{queue}} calls waiting </h3>
+                                <h3 ng-if="queue == 0"> you have no calls waiting </h3>
                             </div>
                         </div>
-                        <div style="margin-top:20px;text-align: center" class="input-group input-group-lg">
-                            <span class="input-group-addon" id="sizing-addon1">00</span>
-                            <input type="text" class="form-control" placeholder="Phone Number" aria-describedby="sizing-addon1">
-                        </div>
+                        {{test1}}
                         <div style="margin-top:20px;text-align: center" class="profile-userbuttons">
-                            <button style="width:20%;marin-top:20px;" type="button" class="btn btn-primary" aria-haspopup="true" aria-expanded="false">call</button>
+                            <button ng-click="catchCall()" style="width:40%;marin-top:20px;" type="button" class="btn btn-primary" aria-haspopup="true" aria-expanded="false">catch the call</button>
                         </div>
                     </div>
                     <div ng-if=" status == 'call' " class="profile-sidebar" style="width: 250px;margin: 0 auto;">

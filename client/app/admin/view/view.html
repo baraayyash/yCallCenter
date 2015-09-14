@@ -1,0 +1,68 @@
+<div class="row">
+    <div class="col-md-9 col-sm-12">
+        <!-- BEGIN PORTLET-->
+        <div class="portlet light">
+            <div class="portlet-title">
+                <div class="caption caption-md">
+                    <i class="icon-bar-chart theme-font-color hide"></i>
+                    <span class="caption-subject theme-font-color bold uppercase">Customer Support</span>
+                    <span class="caption-helper">45 pending</span>
+                </div>
+                <div class="inputs">
+                    <div class="portlet-input input-inline input-small ">
+                        <div class="input-icon right">
+                            <i class="icon-magnifier"></i>
+                            <input type="text" class="form-control form-control-solid" placeholder="search...">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table st-table="calls" class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th st-sort="_id">_id</th>
+                            <th st-sort="_id">_id</th>
+                            <th st-sort="_id">_id</th>
+                            <th st-sort="_id">_id</th>
+                            <th>email</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input st-search="'_id'" placeholder="search for firstname" class="input-sm form-control" type="search" />
+                            </th>
+                            <th colspan="4">
+                                <input st-search placeholder="global search" class="input-sm form-control" type="search" />
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in calls">
+                            <td>{{row._id | uppercase}}</td>
+                            <td>{{row._id}}</td>
+                            <td>{{row._id }}</td>
+                            <td>{{row._id  }}</td>
+                            <td>email</a></td>
+                        </tr>
+                      <!--  <tr ng-repeat="call in calls">
+                            <td>{{call._id}}</td>
+                            <td>{{call._id}}</td>
+                            <td>{{call._id}}</td>
+                            <td>{{call._id}}</td>
+                            <td><a ng-href="">email</a></td>
+                        </tr> -->
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        <!-- END PORTLET-->
+    </div>
+</div>
