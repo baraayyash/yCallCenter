@@ -11,9 +11,12 @@ var router = express.Router();
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);
+router.get('/getQueue/:id',  controller.getQueue);
+router.get('/updateQueue/:id',  controller.updateQueue);
 router.get('/supervisor/:id', auth.isAuthenticated(), controller.supervisor);
 router.get('/token/:id',  auth.isAuthenticated(), controller.token);
-router.post('/flag/:id',  auth.isAuthenticated(), controller.flag);
+router.get('/getCall/:id',  auth.isAuthenticated(), controller.getCall);
+router.post('/setFlag/:id',  auth.isAuthenticated(), controller.setFlag);
 router.get('/getFlag/:id', auth.isAuthenticated(), controller.getFlag);
 router.post('/', controller.create);
 router.put('/:id', controller.update);

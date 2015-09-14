@@ -7,7 +7,9 @@ var CallSchema = new Schema({
   time: Date,
   user: String,
   supervisor: String,
-  duration: String
+  duration: String,
+  callStatus: String,
+  inQueue: String,
 });
 
 module.exports = mongoose.model('Call', CallSchema);

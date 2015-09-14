@@ -11,11 +11,11 @@ angular.module('yCallCenterApp')
 
         resolve : {
 
-            "check" : function($location,$rootScope,$cookieStore){
+            'check' : function($location,$rootScope,$cookieStore){
 
                 if(!$cookieStore.get('currentSupervisor')){
-                        $location.path("/login");
-                        console.log("error");
+                        $location.path('/login');
+                        console.log('error');
                     }
             }
         },

@@ -8,11 +8,12 @@ angular.module('yCallCenterApp')
         $scope.errors = {};
         //get the flag from heruko server
         $http.get('/api/calls/getFlag/1').success(function(flag) {
-            console.log(flag)
-            if (flag)
+            if (flag){
                 $scope.checkbox = true;
-            else
+            }
+            else{
                 $scope.checkbox = false;
+            }
 
         });
 
@@ -30,21 +31,23 @@ angular.module('yCallCenterApp')
         //set flag in the heruko server
         $scope.sendFlag = function(checkbox) {
             var id;
-            if (checkbox)
+            if (checkbox){
                 id = 1;
-            else
+            }
+            else{
                 id = 0;
+            }
 
 
             var request = $http({
-                method: "post",
-                url: "api/calls/flag/1",
+                method: 'post',
+                url: 'api/calls/setFlag/1',
                 data: {
                     id: id,
                 }
             });
             request.success(function() {
-                console.log("sened");
+                console.log('sened');
             });
 
         };
@@ -66,8 +69,9 @@ angular.module('yCallCenterApp')
 
                     })
                     .catch(function(err) {
-                        if (err.status = 422)
-                            $scope.errors.other = "user exists";
+                        if (err.status === 422){
+                            $scope.errors.other = 'user exists';
+                        }
                     });
             }
 
